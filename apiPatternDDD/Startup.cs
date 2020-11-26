@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using apiPatternDDD.Domain.Interfaces.Repository;
 using apiPatternDDD.Infra.Data;
+using apiPatternDDD.Infra.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +34,8 @@ namespace apiPatternDDD
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddSingleton<IHeroRepository, HeroRepository>();
 
             services.AddControllers();
         }
