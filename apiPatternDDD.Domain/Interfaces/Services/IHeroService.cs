@@ -12,26 +12,26 @@ namespace apiPatternDDD.Domain.Interfaces.Services
         /// </summary>
         /// <param name="hero"></param>
         /// <returns></returns>
-        void InsertHeroAsync(Hero hero);
+        void InsertHero(Hero hero);
 
         /// <summary>
         /// GetHeroById
         /// </summary>
         /// <param name="heroId"></param>
         /// <returns></returns>
-        Task<Hero> GetHeroById(int heroId);
+        Hero GetHeroById(int heroId);
 
         /// <summary>
         /// Metodo que invoca o update de Heroís
         /// </summary>
         /// <param name="hero"></param>
         /// <returns></returns>
-        void UpdateHeroAsync(Hero hero, int heroId);
+        void UpdateHero(Hero hero, int heroId);
 
         /// <summary>
         /// GetAsync
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<Hero>> GetAllHeros();   
+        IEnumerable<Hero> GetAllHeros();   
     }
 }

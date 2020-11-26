@@ -26,11 +26,11 @@ namespace apiPatternDDD.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
             try
             {
-                var hero = await _service.GetAllHeros();
+                var hero = _service.GetAllHeros();
                 return new ObjectResult(hero) { StatusCode = StatusCodes.Status200OK };
             }
             catch(Exception ex)
@@ -45,11 +45,11 @@ namespace apiPatternDDD.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([FromRoute] int id)
+        public IActionResult GetById([FromRoute] int id)
         {
             try
             {
-                var hero = await _service.GetHeroById(id);
+                var hero = _service.GetHeroById(id);
                 return new ObjectResult(hero) { StatusCode = StatusCodes.Status200OK };
             }
             catch (Exception ex)
@@ -68,7 +68,7 @@ namespace apiPatternDDD.Controllers
         {
             try
             {
-                _service.InsertHeroAsync(hero);
+                _service.InsertHero(hero);
                 return new ObjectResult(hero) { StatusCode = StatusCodes.Status201Created };
             }
             catch (Exception ex)
@@ -88,7 +88,7 @@ namespace apiPatternDDD.Controllers
         {
             try
             {
-                _service.UpdateHeroAsync(hero, id);
+                _service.UpdateHero(hero, id);
                 return new ObjectResult(hero) { StatusCode = StatusCodes.Status200OK };
             }
             catch (Exception ex)

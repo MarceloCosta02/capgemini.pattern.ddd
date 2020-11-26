@@ -20,7 +20,7 @@ namespace apiPatternDDD.Service
         /// GetAsync
         /// </summary>
         /// <returns></returns>
-        public Task<IEnumerable<Hero>> GetAllHeros()
+        public IEnumerable<Hero> GetAllHeros()
         {
             var heros = _repo.GetAll();
             return heros;
@@ -31,9 +31,9 @@ namespace apiPatternDDD.Service
         /// </summary>
         /// <param name="heroId"></param>
         /// <returns></returns>
-        public async Task<Hero> GetHeroById(int heroId)
+        public Hero GetHeroById(int heroId)
         {
-            var result = await _repo.GetById(heroId);
+            var result = _repo.GetById(heroId);
             if (result == null)
                 throw new NotImplementedException($"Não foi encontrado um Heroí com o ID: {heroId}.");
             else
@@ -45,11 +45,11 @@ namespace apiPatternDDD.Service
         /// </summary>
         /// <param name="hero"></param>
         /// <returns></returns>
-        public async void InsertHeroAsync(Hero hero)
+        public void InsertHero(Hero hero)
         {
-            _repo.InsertAsync(hero);
+            _repo.Insert(hero);
 
-            if (!await _repo.SaveChangeAsync())
+            if (!_repo.SaveChanges())
                 throw new InvalidOperationException();
         }
 
@@ -58,17 +58,17 @@ namespace apiPatternDDD.Service
         /// </summary>
         /// <param name="hero"></param>
         /// <returns></returns>
-        public async void UpdateHeroAsync(Hero hero, int heroId)
+        public void UpdateHero(Hero hero, int heroId)
         {
-            var result = await _repo.GetById(heroId);
+            var result = _repo.GetById(heroId);
 
             if (result == null)
                 throw new NotImplementedException($"Não foi encontrado um Heroí com o ID: {heroId}.");
             else
             {
-                _repo.UpdateAsync(hero);
+                _repo.Update(hero);
 
-                if (!await _repo.SaveChangeAsync())
+                if (!_repo.SaveChanges())
                     throw new InvalidOperationException();
             }
         }

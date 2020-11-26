@@ -22,7 +22,7 @@ namespace apiPatternDDD.Infra.Data.Repository
         /// GetAsync
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<Hero>> GetAll()
+        public IEnumerable<Hero> GetAll()
         {
             IQueryable<Hero> query = _context.Hero;           
 
@@ -30,7 +30,7 @@ namespace apiPatternDDD.Infra.Data.Repository
                 .AsNoTracking()
                 .OrderBy(p => p.HeroId);
 
-            return await query.ToArrayAsync();
+            return query.ToArray();
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace apiPatternDDD.Infra.Data.Repository
         /// </summary>
         /// <param name="heroId"></param>
         /// <returns></returns>
-        public async Task<Hero> GetById(int heroId)
+        public Hero GetById(int heroId)
         {
             IQueryable<Hero> query = _context.Hero;      
 
@@ -46,7 +46,7 @@ namespace apiPatternDDD.Infra.Data.Repository
                 .AsNoTracking()
                 .OrderBy(h => h.HeroId);
 
-            return await query.FirstOrDefaultAsync(h => h.HeroId == heroId);
+            return query.FirstOrDefault(h => h.HeroId == heroId);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace apiPatternDDD.Infra.Data.Repository
         /// </summary>
         /// <param name="hero"></param>
         /// <returns></returns>
-        public void InsertAsync(Hero hero)
+        public void Insert(Hero hero)
         {
             _context.Add(hero);
         }
@@ -64,18 +64,18 @@ namespace apiPatternDDD.Infra.Data.Repository
         /// </summary>
         /// <param name="hero"></param>
         /// <returns></returns>
-        public void UpdateAsync(Hero hero)
+        public void Update(Hero hero)
         {
             _context.Update(hero);
         }
 
         /// <summary>
-        /// SaveChangeAsync
+        /// SaveChange
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> SaveChangeAsync()
+        public bool SaveChanges()
         {
-            return (await _context.SaveChangesAsync()) > 0;
+            return (_context.SaveChanges()) > 0;
         }
     }
 }
