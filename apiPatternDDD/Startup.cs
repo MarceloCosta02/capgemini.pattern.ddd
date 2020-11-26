@@ -37,8 +37,8 @@ namespace apiPatternDDD
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddSingleton<IHeroRepository, HeroRepository>();
-            services.AddSingleton<IHeroService, HeroService>();
+            services.AddScoped<IHeroRepository, HeroRepository>();
+            services.AddScoped<IHeroService, HeroService>();
 
             services.AddControllers();
         }
