@@ -16,6 +16,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using apiPatternDDD.Infra.CrossCutting;
+using apiPatternDDD.Infra.CrossCutting.IoC;
 
 namespace apiPatternDDD
 {
@@ -37,10 +39,10 @@ namespace apiPatternDDD
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddScoped<IHeroRepository, HeroRepository>();
-            services.AddScoped<IHeroService, HeroService>();
+            RegisterService(services);
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
+            services.ConfigurarSwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,11 +51,13 @@ namespace apiPatternDDD
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
+            }                       
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UtilizarConfiguracaoSwagger();
 
             app.UseAuthorization();
 
@@ -61,6 +65,12 @@ namespace apiPatternDDD
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private static void RegisterService(IServiceCollection services)
+        {
+            var parametros = new Dictionary<Enum, string>();
+            NativeInjectorBootStrapper.RegisterServices(services, parametros);
         }
     }
 }

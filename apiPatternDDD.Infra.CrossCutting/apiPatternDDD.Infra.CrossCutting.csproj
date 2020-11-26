@@ -4,4 +4,15 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\apiPatternDDD.Domain\apiPatternDDD.Domain.csproj" />
+    <ProjectReference Include="..\apiPatternDDD.Infra.Data\apiPatternDDD.Infra.Data.csproj" />
+    <ProjectReference Include="..\apiPatternDDD.Service\apiPatternDDD.Service.csproj" />
+  </ItemGroup>
+
 </Project>
