@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\apiPatternDDD.Domain\apiPatternDDD.Domain.csproj" />
     <ProjectReference Include="..\apiPatternDDD.Infra.Data\apiPatternDDD.Infra.Data.csproj" />
+    <ProjectReference Include="..\apiPatternDDD.Service\apiPatternDDD.Service.csproj" />
   </ItemGroup>
 
 

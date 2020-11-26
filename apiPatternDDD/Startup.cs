@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using apiPatternDDD.Domain.Interfaces.Repository;
+using apiPatternDDD.Domain.Interfaces.Services;
 using apiPatternDDD.Infra.Data;
 using apiPatternDDD.Infra.Data.Repository;
+using apiPatternDDD.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,6 +38,7 @@ namespace apiPatternDDD
             });
 
             services.AddSingleton<IHeroRepository, HeroRepository>();
+            services.AddSingleton<IHeroService, HeroService>();
 
             services.AddControllers();
         }
